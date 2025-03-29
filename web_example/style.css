@@ -1,0 +1,202 @@
+:root {
+  --primary-color: #1a5fb4;
+  --secondary-color: #ff7a59;
+  --success-color: #2ecc71;
+  --warning-color: #f39c12;
+  --danger-color: #e74c3c;
+  --light-bg: #f8f9fa;
+  --dark-bg: #343a40;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-bg);
+  color: #333;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.dashboard-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 20px 0;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-title {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.dashboard-subtitle {
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+.account-name {
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  margin-bottom: 20px;
+  border: none;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 15px 20px;
+}
+
+.node-card {
+  height: 100%;
+}
+
+.node-url {
+  font-size: 0.9rem;
+  word-break: break-all;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.metric-value {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.status-ok {
+  background-color: var(--success-color);
+}
+
+.status-warning {
+  background-color: var(--warning-color);
+}
+
+.status-error {
+  background-color: var(--danger-color);
+}
+
+.rank-badge {
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background-color: #e9ecef;
+  color: #495057;
+  font-weight: 600;
+}
+
+.rank-1 {
+  background-color: #ffd700;
+  color: #000;
+}
+
+.rank-2 {
+  background-color: #c0c0c0;
+  color: #000;
+}
+
+.rank-3 {
+  background-color: #cd7f32;
+  color: #fff;
+}
+
+.failing-node {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.failing-reason {
+  color: var(--danger-color);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.stat-group {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.stat-group:last-child {
+  border-bottom: none;
+}
+
+.summary-card {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.summary-value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.summary-label {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.tab-content {
+  padding-top: 20px;
+}
+
+.nav-tabs .nav-link {
+  font-weight: 600;
+  color: #495057;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  border-bottom-width: 3px;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.json-key {
+  color: #ff7a59;
+}
+
+.json-string {
+  color: #2ecc71;
+}
+
+.json-number {
+  color: #3498db;
+}
+
+.json-boolean {
+  color: #9b59b6;
+}
+
+.json-null {
+  color: #e74c3c;
+}
