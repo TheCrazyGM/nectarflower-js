@@ -1,38 +1,90 @@
-# nectarflower-js
+# flowerengine-js
 
-Example Uses of the NectarFlower `account_json_metatdata` in js
+A JavaScript library for retrieving Hive-Engine node information from the FlowerEngine account's JSON metadata.
+
+## Features
+
+- Fetch Hive-Engine node list from the FlowerEngine account metadata
+- Get both active and failing nodes with detailed information
+- Simple API for integrating with your Hive-Engine applications
 
 ## node-updater.js
 
-Module to reinstate dhive with the nodelist from nectarflower
+Core module that fetches the list of Hive-Engine nodes from the FlowerEngine account.
 
 ```javascript
 // Example usage
-updateNodesFromAccount("nectarflower")
-  .then((updatedClient) => {
-    console.log("Node update complete");
-    // Use the updated client for further operations
-    return updatedClient.database.getDynamicGlobalProperties();
+updateNodesFromAccount("flowerengine")
+  .then(({ nodes, failing_nodes }) => {
+    console.log("Node update complete. Nodes:");
+    nodes.forEach((node, idx) => console.log(`${idx + 1}. ${node}`));
+    
+    if (Object.keys(failing_nodes).length > 0) {
+      console.log("Failing nodes:");
+      Object.entries(failing_nodes).forEach(([node, reason]) => {
+        console.log(`- ${node}: ${reason}`);
+      });
+    }
   })
-  .then((result) => {
-    console.log(
-      "Test query with updated client successful:",
-      result.head_block_number,
-    );
-  })
-  .catch((error) => {
+  .catch(error => {
     console.error("Error:", error);
   });
 ```
 
 ## example-usage.js
 
-Pretty exhaustive usage of the node-updater.js module for testing and example
+A practical example showing how to:
+
+1. Fetch the list of Hive-Engine nodes from the FlowerEngine account
+2. Use one of the nodes to query token information from the Hive-Engine blockchain
+
+```javascript
+// Fetch nodes and query token information
+async function demonstrateNodeUpdater() {
+  try {
+    // Get nodes from FlowerEngine account
+    const { nodes } = await nodeUpdater.updateNodesFromAccount();
+    
+    // Use a node to query token information
+    const nodeUrl = nodes[0];
+    const apiUrl = `${nodeUrl}/contracts`;
+    
+    // Query SWAP.HIVE token information
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "find",
+        params: {
+          contract: "tokens",
+          table: "tokens",
+          query: { symbol: "SWAP.HIVE" },
+          limit: 1
+        }
+      })
+    });
+    
+    const data = await response.json();
+    console.log("Token info:", data.result);
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+}
+```
 
 ## web_example
 
-Output of the `account_json_metatdata` from nectarflower in fairly readable format
+A web interface for viewing the account JSON metadata from FlowerEngine in a readable format.
+
+## Installation
+
+```bash
+npm install @hiveio/dhive
+```
 
 ## Shoutouts
 
-- [dhive](https://github.com/hiveio/dhive) for the js library, I'm still learning how to use javascript and I couldn't play on hive without it.
+- [dhive](https://github.com/hiveio/dhive) for the JavaScript library that makes Hive blockchain interaction possible
+- [FlowerEngine](https://peakd.com/@flowerengine) for maintaining the list of Hive-Engine nodes
